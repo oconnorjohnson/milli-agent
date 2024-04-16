@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import TopNav from "@/components/root/layout/top-nav";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <body>{children}</body>
+        <body>
+          <TopNav />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
