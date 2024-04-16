@@ -25,23 +25,3 @@ export async function test() {
     throw error;
   }
 }
-
-// const { createClient } = require("@deepgram/sdk");
-// require("dotenv").config();
-
-// const transcribeUrl = async () => {
-//   const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
-//   const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-//     {
-//       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-//     },
-//     {
-//       model: "nova-2",
-//       smart_format: true,
-//     }
-//   );
-//   if (error) throw error;
-//   if (!error) console.dir(result, { depth: null });
-// };
-
-// transcribeUrl();
