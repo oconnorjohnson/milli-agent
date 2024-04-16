@@ -1,0 +1,47 @@
+"use server";
+import { createClient } from "@deepgram/sdk";
+
+export async function test() {
+  if (!process.env.DEEPGRAM_API_KEY) {
+    throw new Error("DEEPGRAM_API_KEY is not set");
+  }
+  const url = "utfs.io/f/8b110c63-bfa7-474b-92a9-8a4f9763f1e2-2diidr.mp3";
+  try {
+    const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
+    const transcriptionResult = await deepgram.listen.prerecorded.transcribeUrl(
+      {
+        url: "https://utfs.io/f/8b110c63-bfa7-474b-92a9-8a4f9763f1e2-2diidr.mp3",
+      },
+      { diarize: true, punctuate: true, smart_format: true }
+    );
+    console.log(transcriptionResult);
+    const transcriptionText =
+      transcriptionResult!.result!.results.channels[0].alternatives[0]
+        .transcript;
+    console.log(transcriptionText);
+    return transcriptionText;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+// const { createClient } = require("@deepgram/sdk");
+// require("dotenv").config();
+
+// const transcribeUrl = async () => {
+//   const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
+//   const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+//     {
+//       url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+//     },
+//     {
+//       model: "nova-2",
+//       smart_format: true,
+//     }
+//   );
+//   if (error) throw error;
+//   if (!error) console.dir(result, { depth: null });
+// };
+
+// transcribeUrl();
