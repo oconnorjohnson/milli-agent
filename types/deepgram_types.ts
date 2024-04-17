@@ -4,7 +4,7 @@ interface Word {
   end: number;
   confidence: number;
   speaker: number;
-  speaker_confidence?: number; // Added to match the JSON structure
+  speaker_confidence?: number;
   punctuated_word?: string;
 }
 
@@ -31,7 +31,7 @@ interface Alternative {
 
 interface Channel {
   alternatives: Alternative[];
-  paragraphs: Paragraph[]; // Added to match the JSON structure
+  paragraphs: Paragraph[];
 }
 
 interface DeepgramResult {
