@@ -18,18 +18,14 @@ export async function TranscribeMeeting({
       {
         url: URL,
       },
-      { diarize: true, punctuate: true, smart_format: true }
+      { model: "nova-2", diarize: true, punctuate: true, smart_format: true }
     );
     console.log(transcriptionResult);
-    const transcriptionText =
-      transcriptionResult!.result!.results.channels[0].alternatives[0]
-        .transcript;
-    console.log(transcriptionText);
-    if (transcriptionText) {
-      const transcriptionJson = { transcript: transcriptionText };
+    const transcriptionJson = transcriptionResult.result;
+    if (transcriptionJson) {
       const transcriptionId = await createTranscription({
         MeetingId: MeetingId,
-        text: transcriptionJson,
+        text: JSON.stringify(transcriptionJson), // Convert to a JSON string if your DB expects a string
       });
       if (transcriptionId) {
         await updateMeeting({
@@ -39,7 +35,7 @@ export async function TranscribeMeeting({
       }
       return transcriptionId;
     } else {
-      console.log("transcriptionText is null");
+      console.log("transcriptionJson is null");
     }
   } catch (error) {
     console.log(error);
