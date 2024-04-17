@@ -119,15 +119,22 @@ export default function NewMeetingDialog() {
   }
 
   const dialogDone = () => {
-    goToFirstTab();
-    form.reset();
+    setTimeout(() => {
+      goToFirstTab();
+      form.reset();
+    }, 500);
   };
 
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button
+            variant="outline"
+            size="icon"
+            type="button"
+            className="rounded-full"
+          >
             <PlusIcon className="h-5 w-5" />
             <span className="sr-only">Toggle calendar</span>
           </Button>
@@ -185,6 +192,7 @@ export default function NewMeetingDialog() {
                               <PopoverTrigger asChild>
                                 <FormControl>
                                   <Button
+                                    type="button"
                                     variant={"outline"}
                                     className={cn(
                                       "w-[240px] pl-3 text-left font-normal",
@@ -263,7 +271,10 @@ export default function NewMeetingDialog() {
                   <ExampleUploader />
                 </CardContent>
               </Card>
-              <DialogClose onClick={dialogDone}>Done</DialogClose>
+              <div className="py-2" />
+              <DialogClose onClick={dialogDone}>
+                <Button type="button">Done</Button>
+              </DialogClose>
             </TabsContent>
           </Tabs>
         </DialogContent>
