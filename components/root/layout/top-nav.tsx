@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { CircleUser, Menu, Package2, Search } from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
-
+import { FcCamcorder } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ export default function TopNav() {
           href="/"
           className={`flex items-center gap-2 text-lg font-semibold `}
         >
-          <Package2 className="h-6 w-6" />
+          <FcCamcorder className="h-10 w-10" />
           <span className="sr-only">Acme Inc</span>
         </Link>
         <Link
