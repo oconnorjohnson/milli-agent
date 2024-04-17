@@ -66,7 +66,9 @@ export default function NewMeetingDialog() {
   const [meeting, setMeeting] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("tab1");
   const [progress, setProgress] = useState(0);
-
+  useEffect(() => {
+    console.log(meeting); // This will log the updated value of meeting after it changes.
+  }, [meeting]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     switch (activeTab) {
@@ -130,6 +132,7 @@ export default function NewMeetingDialog() {
       });
       if (createdMeetingId) {
         setMeeting(createdMeetingId); // Update the meeting state variable
+        console.log(createdMeetingId);
         toast.success("Meeting created");
       } else {
         toast.error("Meeting creation failed");

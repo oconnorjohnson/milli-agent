@@ -24,7 +24,7 @@ export const ourFileRouter = {
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+      console.log("Upload complete with meeting id input as:", metadata.id);
       const recordingId = await updateMeeting({
         id: metadata.id,
         recordingUrl: file.url,

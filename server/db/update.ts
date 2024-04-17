@@ -6,7 +6,10 @@ export async function updateMeeting(
   MeetingData: TablesUpdate<"Meetings">
 ): Promise<boolean> {
   try {
-    const { data, error } = await supabase.from("Meetings").update(MeetingData);
+    const { data, error } = await supabase
+      .from("Meetings")
+      .update(MeetingData)
+      .eq("id", MeetingData.id);
     if (error) {
       console.log(error);
       return false;
