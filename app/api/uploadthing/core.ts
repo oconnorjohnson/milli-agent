@@ -3,6 +3,7 @@ import { UploadThingError } from "uploadthing/server";
 import { currentUser } from "@clerk/nextjs";
 import { updateMeeting } from "@/server/db/update";
 import { z } from "zod";
+import { TranscribeMeeting } from "@/server/transcribe/actions";
 const f = createUploadthing();
 const auth = async () => {
   const user = await currentUser();
@@ -29,6 +30,11 @@ export const ourFileRouter = {
         id: metadata.id,
         recordingUrl: file.url,
       });
+      if (recordingId) {
+        await TranscribeMeeting({ URL: file.url, MeetingId: metadata.id });
+      } else {
+        console.log("recordingId is null");
+      }
       console.log(recordingId);
       console.log("file url", file.url);
 

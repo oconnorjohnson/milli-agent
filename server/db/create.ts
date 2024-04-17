@@ -46,20 +46,22 @@ export async function createSummary(
 
 export async function createTranscription(
   TranscriptionData: TablesInsert<"Transcriptions">
-): Promise<boolean> {
+): Promise<number> {
   try {
     const { data, error } = await supabase
       .from("Transcriptions")
-      .insert(TranscriptionData);
+      .insert(TranscriptionData)
+      .select("id")
+      .single();
     if (error) {
       console.log(error);
-      return false;
+      throw error;
     } else {
       console.log(data);
-      return true;
+      return data.id;
     }
   } catch (error) {
     console.log(error);
-    return false;
+    throw error;
   }
 }

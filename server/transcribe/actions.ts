@@ -1,11 +1,16 @@
 "use server";
 import { createClient } from "@deepgram/sdk";
-
-export async function TranscribeMeeting({ URL }: { URL: string }) {
+import { createTranscription } from "@/server/db/create";
+export async function TranscribeMeeting({
+  URL,
+  MeetingId,
+}: {
+  URL: string;
+  MeetingId: number;
+}) {
   if (!process.env.DEEPGRAM_API_KEY) {
     throw new Error("DEEPGRAM_API_KEY is not set");
   }
-  const url = "utfs.io/f/8b110c63-bfa7-474b-92a9-8a4f9763f1e2-2diidr.mp3";
   try {
     const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
     const transcriptionResult = await deepgram.listen.prerecorded.transcribeUrl(
@@ -19,7 +24,16 @@ export async function TranscribeMeeting({ URL }: { URL: string }) {
       transcriptionResult!.result!.results.channels[0].alternatives[0]
         .transcript;
     console.log(transcriptionText);
-    return transcriptionText;
+    if (transcriptionText) {
+      const transcriptionJson = { transcript: transcriptionText };
+      const transcriptionId = await createTranscription({
+        MeetingId: MeetingId,
+        text: transcriptionJson,
+      });
+      return transcriptionId;
+    } else {
+      console.log("transcriptionText is null");
+    }
   } catch (error) {
     console.log(error);
     throw error;
