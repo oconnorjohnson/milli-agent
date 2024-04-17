@@ -77,6 +77,67 @@ export default function TopNav() {
         >
           World
         </Link>
+        <Link
+          href="/plot"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/plot")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Plot
+        </Link>
+        <Link
+          href="/themes"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/themes")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Themes
+        </Link>
+        <Link
+          href="/script"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/script")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Script
+        </Link>
+        <Link
+          href="/design"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/design")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Design
+        </Link>
+
+        <Link
+          href="/audience"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/audience")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Audience
+        </Link>
+        <Link
+          href="/feedback"
+          className={`text-muted-foreground transition-colors ${
+            pathname.startsWith("/feedback")
+              ? "text-white"
+              : "text-muted-foreground"
+          } hover:text-foreground`}
+        >
+          Feedback
+        </Link>
       </nav>
       <div className="">
         <Sheet>
