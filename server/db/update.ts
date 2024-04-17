@@ -29,7 +29,8 @@ export async function updateRecording(
   try {
     const { data, error } = await supabase
       .from("Recordings")
-      .update(RecordingData);
+      .update(RecordingData)
+      .eq("id", RecordingData.id);
     if (error) {
       console.log(error);
       return false;
@@ -49,7 +50,8 @@ export async function updateSummary(
   try {
     const { data, error } = await supabase
       .from("Summaries")
-      .update(SummaryData);
+      .update(SummaryData)
+      .eq("id", SummaryData.id);
     if (error) {
       console.log(error);
       return false;
@@ -69,7 +71,8 @@ export async function updateTranscription(
   try {
     const { data, error } = await supabase
       .from("Transcriptions")
-      .update(TranscriptionData);
+      .update(TranscriptionData)
+      .eq("id", TranscriptionData.id);
     if (error) {
       console.log(error);
       return false;
