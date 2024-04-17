@@ -31,6 +31,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -45,6 +46,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ExampleUploader from "@/components/examples/example-uploader";
 
 const FormSchema = z.object({
   date: z.date({
@@ -95,6 +97,13 @@ export default function NewMeetingDialog() {
     }
   };
 
+  const goToFirstTab = () => {
+    if (activeTab !== "tab1") {
+      const firstTab = `tab1`;
+      setActiveTab(firstTab);
+    }
+  };
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -108,6 +117,11 @@ export default function NewMeetingDialog() {
     goToNextTab();
     toast.success("Meeting created");
   }
+
+  const dialogDone = () => {
+    goToFirstTab();
+    form.reset();
+  };
 
   return (
     <>
@@ -123,15 +137,14 @@ export default function NewMeetingDialog() {
             value={activeTab}
             onValueChange={setActiveTab}
             defaultValue="tab1"
-            className="w-[400px]"
+            className="pt-1 px-2"
           >
             <TabsContent value="tab1" hidden={activeTab !== "tab1"}>
               <Card>
                 <CardHeader>
-                  <CardTitle>Account</CardTitle>
+                  <CardTitle>New Meeting</CardTitle>
                   <CardDescription>
-                    Make changes to your account here. Click save when you're
-                    done.
+                    Add a new meeting record to upload a recording.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
@@ -232,35 +245,25 @@ export default function NewMeetingDialog() {
                           </FormItem>
                         )}
                       />
-                      <Button type="submit">Submit</Button>
+                      <Button type="submit">Save Details</Button>
                     </form>
                   </Form>
                 </CardContent>
               </Card>
             </TabsContent>
             <TabsContent value="tab2" hidden={activeTab !== "tab2"}>
-              {/* <Card>
+              <Card>
                 <CardHeader>
-                  <CardTitle>Password</CardTitle>
+                  <CardTitle>Upload Recording</CardTitle>
                   <CardDescription>
-                    Change your password here. After saving, you'll be logged
-                    out.
+                    Upload a .mp3 recording of the meeting.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="current">Current password</Label>
-                    <Input id="current" type="password" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="new">New password</Label>
-                    <Input id="new" type="password" />
-                  </div>
+                  <ExampleUploader />
                 </CardContent>
-                <CardFooter>
-                  <Button>Save password</Button>
-                </CardFooter>
-              </Card> */}
+              </Card>
+              <DialogClose onClick={dialogDone}>Done</DialogClose>
             </TabsContent>
           </Tabs>
         </DialogContent>
