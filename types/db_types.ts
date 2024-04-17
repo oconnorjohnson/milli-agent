@@ -45,13 +45,6 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "public_Meetings_RecordingId_fkey";
-            columns: ["RecordingId"];
-            isOneToOne: true;
-            referencedRelation: "Recordings";
-            referencedColumns: ["id"];
-          },
-          {
             foreignKeyName: "public_Meetings_SummaryId_fkey";
             columns: ["SummaryId"];
             isOneToOne: true;
@@ -66,24 +59,6 @@ export type Database = {
             referencedColumns: ["id"];
           }
         ];
-      };
-      Recordings: {
-        Row: {
-          created_at: string;
-          id: number;
-          url: string;
-        };
-        Insert: {
-          created_at?: string;
-          id?: number;
-          url: string;
-        };
-        Update: {
-          created_at?: string;
-          id?: number;
-          url?: string;
-        };
-        Relationships: [];
       };
       Summaries: {
         Row: {
