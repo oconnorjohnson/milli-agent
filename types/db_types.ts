@@ -68,30 +68,19 @@ export type Database = {
         Row: {
           created_at: string;
           id: number;
-          MeetingId: number;
           url: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          MeetingId: number;
           url: string;
         };
         Update: {
           created_at?: string;
           id?: number;
-          MeetingId?: number;
           url?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: "public_Recordings_MeetingId_fkey";
-            columns: ["MeetingId"];
-            isOneToOne: true;
-            referencedRelation: "Meetings";
-            referencedColumns: ["id"];
-          }
-        ];
+        Relationships: [];
       };
       Summaries: {
         Row: {

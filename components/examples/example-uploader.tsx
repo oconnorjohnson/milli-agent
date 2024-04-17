@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between pt-12 pb-8">
       <UploadButton
-        endpoint="imageUploader"
+        endpoint="audioUploader"
         onClientUploadComplete={(res) => {
           // Do something with the response
           console.log("Files: ", res);
