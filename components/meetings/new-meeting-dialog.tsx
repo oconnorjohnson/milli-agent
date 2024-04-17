@@ -191,7 +191,7 @@ export default function NewMeetingDialog() {
                             <FormControl>
                               <Input
                                 className={cn(
-                                  "w-[240px] pl-3 text-left font-normal",
+                                  " pl-3 text-left font-normal",
                                   !field.value && "text-muted-foreground"
                                 )}
                                 {...field}
@@ -217,7 +217,7 @@ export default function NewMeetingDialog() {
                                     type="button"
                                     variant={"outline"}
                                     className={cn(
-                                      "w-[240px] pl-3 text-left font-normal",
+                                      " pl-3 text-left font-normal",
                                       !field.value && "text-muted-foreground"
                                     )}
                                   >
@@ -262,7 +262,7 @@ export default function NewMeetingDialog() {
                             <FormControl>
                               <Textarea
                                 className={cn(
-                                  "w-[240px] pl-3 text-left font-normal",
+                                  " pl-3 text-left font-normal",
                                   !field.value && "text-muted-foreground"
                                 )}
                                 {...field}

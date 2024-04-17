@@ -30,11 +30,11 @@ export const columns: ColumnDef<Meeting>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}
         >
-          Meeting Date
+          Meeting Date <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Meeting>[] = [
       const date = row.original.date;
       return (
         <div className="flex items-center space-x-2">
-          <Badge variant="secondary">{date.toLocaleDateString()}</Badge>
+          <Badge variant="outline">{date.toLocaleDateString()}</Badge>
         </div>
       );
     },
@@ -52,11 +52,11 @@ export const columns: ColumnDef<Meeting>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => column.toggleSorting()}
         >
-          Title
+          Title <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -74,11 +74,11 @@ export const columns: ColumnDef<Meeting>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => column.toggleSorting()}
         >
-          Description
+          Description <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
