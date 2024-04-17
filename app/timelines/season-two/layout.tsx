@@ -1,4 +1,3 @@
-import SideNav from "@/components/dashboard/timelines/side-nav";
 export default function TimelinesLayout({
   children,
 }: {
@@ -6,7 +5,6 @@ export default function TimelinesLayout({
 }) {
   return (
     <div className="flex flex-row">
-      <SideNav />
       <div className="flex-1 overflow-auto p-8">{children}</div>
     </div>
   );

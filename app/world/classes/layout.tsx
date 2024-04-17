@@ -1,12 +1,10 @@
-import SideNav from "@/components/dashboard/timelines/side-nav";
-export default function TimelinesLayout({
+export default function WorldLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-row">
-      <SideNav />
       <div className="flex-1 overflow-auto p-8">{children}</div>
     </div>
   );
