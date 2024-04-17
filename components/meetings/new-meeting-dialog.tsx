@@ -288,9 +288,9 @@ export default function NewMeetingDialog() {
             <TabsContent value="tab2" hidden={activeTab !== "tab2"}>
               <Card>
                 <CardHeader>
-                  <CardTitle>Upload Recording</CardTitle>
+                  <CardTitle>Upload & Transcribe Recording</CardTitle>
                   <CardDescription>
-                    Upload a .mp3 recording of the meeting.
+                    Upload an .mp3 recording of the meeting.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
