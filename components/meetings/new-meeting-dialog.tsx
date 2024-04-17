@@ -275,7 +275,7 @@ export default function NewMeetingDialog() {
                           </FormItem>
                         )}
                       />
-                      <Button type="submit">Save Details</Button>
+                      <Button type="submit">Proceed to Transcription</Button>
                     </form>
                   </Form>
                 </CardContent>
