@@ -1,6 +1,7 @@
 "use server";
 import { createClient } from "@deepgram/sdk";
 import { createTranscription } from "@/server/db/create";
+import { updateMeeting } from "@/server/db/update";
 export async function TranscribeMeeting({
   URL,
   MeetingId,
@@ -30,6 +31,12 @@ export async function TranscribeMeeting({
         MeetingId: MeetingId,
         text: transcriptionJson,
       });
+      if (transcriptionId) {
+        await updateMeeting({
+          id: MeetingId,
+          TranscriptionId: transcriptionId,
+        });
+      }
       return transcriptionId;
     } else {
       console.log("transcriptionText is null");
