@@ -16,6 +16,7 @@ export type Database = {
           description: string;
           id: number;
           RecordingId: number | null;
+          recordingUrl: string | null;
           SummaryId: number | null;
           title: string;
           TranscriptionId: number | null;
@@ -26,6 +27,7 @@ export type Database = {
           description: string;
           id?: number;
           RecordingId?: number | null;
+          recordingUrl?: string | null;
           SummaryId?: number | null;
           title: string;
           TranscriptionId?: number | null;
@@ -36,6 +38,7 @@ export type Database = {
           description?: string;
           id?: number;
           RecordingId?: number | null;
+          recordingUrl?: string | null;
           SummaryId?: number | null;
           title?: string;
           TranscriptionId?: number | null;

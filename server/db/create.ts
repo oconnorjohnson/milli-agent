@@ -4,39 +4,45 @@ import { TablesInsert } from "@/types/db_types";
 
 export async function createMeeting(
   MeetingData: TablesInsert<"Meetings">
-): Promise<boolean> {
+): Promise<number> {
   try {
-    const { data, error } = await supabase.from("Meetings").insert(MeetingData);
+    const { data, error } = await supabase
+      .from("Meetings")
+      .insert(MeetingData)
+      .select("id")
+      .single();
     if (error) {
       console.log(error);
-      return false;
+      throw error;
     } else {
       console.log(data);
-      return true;
+      return data.id;
     }
   } catch (error) {
     console.log(error);
-    return false;
+    throw error;
   }
 }
 
 export async function createRecording(
   RecordingData: TablesInsert<"Recordings">
-): Promise<boolean> {
+): Promise<number> {
   try {
     const { data, error } = await supabase
       .from("Recordings")
-      .insert(RecordingData);
+      .insert(RecordingData)
+      .select("id")
+      .single();
     if (error) {
       console.log(error);
-      return false;
+      throw error;
     } else {
       console.log(data);
-      return true;
+      return data.id;
     }
   } catch (error) {
     console.log(error);
-    return false;
+    throw error;
   }
 }
 

@@ -46,7 +46,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ExampleUploader from "@/components/examples/example-uploader";
+import { UploadButton } from "@/lib/uploadthing";
+import { createMeeting } from "@/server/db/create";
+import { updateMeeting } from "@/server/db/update";
 
 const FormSchema = z.object({
   date: z.date({
@@ -55,10 +57,16 @@ const FormSchema = z.object({
   title: z.string({ required_error: "A title is required." }),
   description: z.string({ required_error: "A description is required." }),
 });
-
+interface ClientUploadedFileData<T = any> {
+  uploadedBy: string;
+  RecordingId: number;
+  // other properties...
+}
 export default function NewMeetingDialog() {
+  const [meeting, setMeeting] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("tab1");
   const [progress, setProgress] = useState(0);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     switch (activeTab) {
@@ -113,9 +121,24 @@ export default function NewMeetingDialog() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    goToNextTab();
-    toast.success("Meeting created");
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      const createdMeetingId = await createMeeting({
+        title: data.title,
+        date: data.date.toISOString(),
+        description: data.description,
+      });
+      if (createdMeetingId) {
+        setMeeting(createdMeetingId); // Update the meeting state variable
+        toast.success("Meeting created");
+      } else {
+        toast.error("Meeting creation failed");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      goToNextTab();
+    }
   }
 
   const dialogDone = () => {
@@ -268,7 +291,20 @@ export default function NewMeetingDialog() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <ExampleUploader />
+                  {meeting && (
+                    <UploadButton
+                      endpoint="audioUploader"
+                      input={{ id: meeting }}
+                      onClientUploadComplete={(res) => {
+                        // Assuming res always contains exactly one object
+                        console.log(res);
+                      }}
+                      onUploadError={(error: Error) => {
+                        // Do something with the error.
+                        alert(`ERROR! ${error.message}`);
+                      }}
+                    />
+                  )}
                 </CardContent>
               </Card>
               <div className="py-2" />
