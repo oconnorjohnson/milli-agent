@@ -1,4 +1,4 @@
-import SideNav from "@/components/dashboard/timelines/side-nav";
+import SideNav from "@/components/timelines/side-nav";
 export default function TimelinesLayout({
   children,
 }: {

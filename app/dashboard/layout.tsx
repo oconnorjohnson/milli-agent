@@ -1,4 +1,3 @@
-"use client";
 import SideNav from "@/components/dashboard/layout/side-nav";
 export default function DashboardLayout({
   children,
@@ -7,7 +6,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="">
-      {/* <SideNav /> */}
+      <SideNav />
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import SideNav from "@/components/dashboard/world/side-nav";
+import SideNav from "@/components/world/side-nav";
 export default function WorldLayout({
   children,
 }: {

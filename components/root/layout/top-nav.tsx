@@ -30,7 +30,9 @@ export default function TopNav() {
         <Link
           href="/dashboard"
           className={`text-muted-foreground transition-colors ${
-            pathname === "/dashboard" ? "text-white" : "text-muted-foreground"
+            pathname.startsWith("/dashboard")
+              ? "text-white"
+              : "text-muted-foreground"
           } hover:text-foreground`}
         >
           Dashboard
@@ -48,7 +50,9 @@ export default function TopNav() {
         <Link
           href="/characters"
           className={`text-muted-foreground transition-colors ${
-            pathname === "/characters" ? "text-white" : "text-muted-foreground"
+            pathname.startsWith("/characters")
+              ? "text-white"
+              : "text-muted-foreground"
           } hover:text-foreground`}
         >
           Characters
@@ -56,7 +60,9 @@ export default function TopNav() {
         <Link
           href="/timelines"
           className={`text-muted-foreground transition-colors ${
-            pathname === "/timelines" ? "text-white" : "text-muted-foreground"
+            pathname.startsWith("/timelines")
+              ? "text-white"
+              : "text-muted-foreground"
           } hover:text-foreground`}
         >
           Timelines
@@ -64,7 +70,9 @@ export default function TopNav() {
         <Link
           href="/world"
           className={`text-muted-foreground transition-colors ${
-            pathname === "/world" ? "text-white" : "text-muted-foreground"
+            pathname.startsWith("/world")
+              ? "text-white"
+              : "text-muted-foreground"
           } hover:text-foreground`}
         >
           World

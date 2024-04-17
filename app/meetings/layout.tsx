@@ -1,4 +1,4 @@
-import SideNav from "@/components/dashboard/meetings/layout/side-nav";
+import SideNav from "@/components/meetings/layout/side-nav";
 export default function MeetingsLayout({
   children,
 }: {
