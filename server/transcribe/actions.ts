@@ -25,7 +25,7 @@ export async function TranscribeMeeting({
     if (transcriptionJson) {
       const transcriptionId = await createTranscription({
         MeetingId: MeetingId,
-        text: JSON.stringify(transcriptionJson), // Convert to a JSON string if your DB expects a string
+        text: JSON.stringify(transcriptionJson),
       });
       if (transcriptionId) {
         await updateMeeting({

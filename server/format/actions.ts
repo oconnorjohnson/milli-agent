@@ -19,7 +19,6 @@ export function formatTranscriptionWithDiarization(
     });
   });
 
-  // Format the output to include speaker labels
   const formattedTranscript = speakerSegments
     .map((segment) => `Speaker ${segment.speaker}: ${segment.text}`)
     .join("\n");

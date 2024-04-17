@@ -1,4 +1,4 @@
-import ExampleUploader from "@/components/examples/example-uploader";
+import MeetingsTable from "@/components/meetings/tables/meetings/page";
 import NewMeetingForm from "@/components/meetings/new-meeting-dialog";
 export default async function Meetings() {
   return (
@@ -6,6 +6,8 @@ export default async function Meetings() {
       <div className="font-bold text-2xl min-h-screen">
         <div className="font-bold text-2xl min-h-screen">
           <NewMeetingForm />
+          <div className="py-4" />
+          <MeetingsTable />
         </div>
       </div>
     </>

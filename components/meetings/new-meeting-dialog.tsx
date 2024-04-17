@@ -155,13 +155,9 @@ export default function NewMeetingDialog() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            type="button"
-            className="rounded-full"
-          >
-            <PlusIcon className="h-5 w-5" />
+          <Button variant="outline" type="button" className="rounded-md">
+            Create New Meeting Transcription{" "}
+            <PlusIcon className="ml-2 h-5 w-5" />
             <span className="sr-only">Toggle calendar</span>
           </Button>
         </DialogTrigger>
