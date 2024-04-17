@@ -24,28 +24,6 @@ export async function createMeeting(
   }
 }
 
-export async function createRecording(
-  RecordingData: TablesInsert<"Recordings">
-): Promise<number> {
-  try {
-    const { data, error } = await supabase
-      .from("Recordings")
-      .insert(RecordingData)
-      .select("id")
-      .single();
-    if (error) {
-      console.log(error);
-      throw error;
-    } else {
-      console.log(data);
-      return data.id;
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
-
 export async function createSummary(
   SummaryData: TablesInsert<"Summaries">
 ): Promise<boolean> {

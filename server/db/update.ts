@@ -23,27 +23,6 @@ export async function updateMeeting(
   }
 }
 
-export async function updateRecording(
-  RecordingData: TablesUpdate<"Recordings">
-): Promise<boolean> {
-  try {
-    const { data, error } = await supabase
-      .from("Recordings")
-      .update(RecordingData)
-      .eq("id", RecordingData.id);
-    if (error) {
-      console.log(error);
-      return false;
-    } else {
-      console.log(data);
-      return true;
-    }
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-}
-
 export async function updateSummary(
   SummaryData: TablesUpdate<"Summaries">
 ): Promise<boolean> {
