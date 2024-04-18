@@ -23,6 +23,31 @@ export async function updateMeeting(
   }
 }
 
+export async function updateTranscriptionWithFormattedText({
+  formattedText,
+  MeetingId,
+}: {
+  formattedText: string;
+  MeetingId: number;
+}): Promise<boolean> {
+  try {
+    const { data, error } = await supabase
+      .from("Transcriptions")
+      .update({ formattedText: formattedText })
+      .eq("MeetingId", MeetingId);
+    if (error) {
+      console.log(error);
+      throw error;
+    } else {
+      console.log(data);
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function updateSummary(
   SummaryData: TablesUpdate<"Summaries">
 ): Promise<boolean> {

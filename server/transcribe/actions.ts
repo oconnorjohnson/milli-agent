@@ -21,11 +21,11 @@ export async function TranscribeMeeting({
       { model: "nova-2", diarize: true, punctuate: true, smart_format: true }
     );
     console.log(transcriptionResult);
-    const transcriptionJson = transcriptionResult.result;
+    const transcriptionJson = transcriptionResult;
     if (transcriptionJson) {
       const transcriptionId = await createTranscription({
         MeetingId: MeetingId,
-        text: JSON.stringify(transcriptionJson),
+        text: JSON.parse(JSON.stringify(transcriptionJson)),
       });
       if (transcriptionId) {
         await updateMeeting({

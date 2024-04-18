@@ -92,18 +92,21 @@ export type Database = {
       Transcriptions: {
         Row: {
           created_at: string;
+          formattedText: string | null;
           id: number;
           MeetingId: number;
           text: Json;
         };
         Insert: {
           created_at?: string;
+          formattedText?: string | null;
           id?: number;
           MeetingId: number;
           text: Json;
         };
         Update: {
           created_at?: string;
+          formattedText?: string | null;
           id?: number;
           MeetingId?: number;
           text?: Json;
