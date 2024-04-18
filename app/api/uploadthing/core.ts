@@ -3,7 +3,7 @@ import { UploadThingError } from "uploadthing/server";
 import { currentUser } from "@clerk/nextjs";
 import { updateMeeting } from "@/server/db/update";
 import { z } from "zod";
-import { TranscribeMeeting } from "@/server/transcribe/actions";
+import { TranscribeMeeting } from "@/server/transcription/transcribe";
 const f = createUploadthing();
 const auth = async () => {
   const user = await currentUser();

@@ -3,6 +3,7 @@ import type { DeepgramResponse } from "@/types/deepgram_types";
 import { Card } from "@/components/ui/card";
 import MeetingPage from "@/components/meetings/meeting-page";
 import type { Json } from "@/types/db_types";
+import { updateTranscriptionWithFormattedText } from "@/server/db/update";
 
 function formatTranscript(deepgramResponse: DeepgramResponse): string[] {
   const words =

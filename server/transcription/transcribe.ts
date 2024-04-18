@@ -2,6 +2,7 @@
 import { createClient } from "@deepgram/sdk";
 import { createTranscription } from "@/server/db/create";
 import { updateMeeting } from "@/server/db/update";
+import { formatTranscript } from "@/server/transcription/format";
 export async function TranscribeMeeting({
   URL,
   MeetingId,
@@ -33,7 +34,14 @@ export async function TranscribeMeeting({
           TranscriptionId: transcriptionId,
         });
       }
-      return transcriptionId;
+      const addedFormattedTranscript = await formatTranscript({
+        // @ts-ignore
+        deepgramResponse: transcriptionJson,
+        MeetingId: MeetingId,
+      });
+      if (addedFormattedTranscript) {
+        return true;
+      }
     } else {
       console.log("transcriptionJson is null");
     }
