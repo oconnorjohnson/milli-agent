@@ -5,17 +5,22 @@ import MeetingPage from "@/components/meetings/meeting-page";
 import type { Json } from "@/types/db_types";
 import { updateTranscriptionWithFormattedText } from "@/server/db/update";
 
-function formatTranscript(deepgramResponse: DeepgramResponse): string[] {
+function formatTranscript(
+  deepgramResponse: DeepgramResponse
+): { speaker: string; text: string }[] {
   const words =
     deepgramResponse.result.results.channels[0].alternatives[0].words;
   let currentSpeaker = words[0].speaker;
-  let sentences: string[] = [];
-  let sentence = `Speaker ${currentSpeaker}: `;
+  let sentences: { speaker: string; text: string }[] = [];
+  let sentence = "";
   words.forEach((word) => {
     if (word.speaker !== currentSpeaker) {
-      sentences.push(sentence.trim());
+      sentences.push({
+        speaker: `Speaker ${currentSpeaker}`,
+        text: sentence.trim(),
+      });
       currentSpeaker = word.speaker;
-      sentence = `Speaker ${currentSpeaker}: `;
+      sentence = "";
     }
     sentence += word.punctuated_word + " ";
     // Add new line for a natural paragraph break after a certain number of words or punctuation.
@@ -29,7 +34,10 @@ function formatTranscript(deepgramResponse: DeepgramResponse): string[] {
   });
   // Append any remaining text in the sentence buffer.
   if (sentence.trim().length > 0) {
-    sentences.push(sentence.trim());
+    sentences.push({
+      speaker: `Speaker ${currentSpeaker}`,
+      text: sentence.trim(),
+    });
   }
   return sentences;
 }
@@ -56,7 +64,10 @@ export default async function MeetingId({
     <div>
       <div>
         {formattedTranscript.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+          <p key={index} className="mb-4">
+            <span className="font-bold text-lg">{paragraph.speaker}:</span>
+            <span className="ml-2">{paragraph.text}</span>
+          </p>
         ))}
       </div>
     </div>

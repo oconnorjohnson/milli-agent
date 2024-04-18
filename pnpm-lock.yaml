@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ai-sdk/openai':
+    specifier: ^0.0.2
+    version: 0.0.2(zod@3.22.4)
   '@clerk/nextjs':
     specifier: ^4.29.12
     version: 4.29.12(next@14.2.1)(react-dom@18.2.0)(react@18.2.0)
@@ -152,6 +155,20 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /@ai-sdk/openai@0.0.2(zod@3.22.4):
+    resolution: {integrity: sha512-Dhq/DPjCR8CcyVzWo980yBkgaUulb4X8B1GMvJJ1/BokPv0e/fP40+K1XP6ARLWWJOf6JRCn1XXDdOkHj2Ljqg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      '@ai-sdk/provider': 0.0.0
+      '@ai-sdk/provider-utils': 0.0.1(zod@3.22.4)
+      zod: 3.22.4
+    dev: false
 
   /@ai-sdk/provider-utils@0.0.1(zod@3.22.4):
     resolution: {integrity: sha512-DpD58qFYHoPffBcODPL5od/zAsFSLymwEdtP/QqNX8qE3oQcRG9GYHbj1fZTH5b9i7COwlnJ4wYzYSkXVyd3bA==}

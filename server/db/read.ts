@@ -21,6 +21,7 @@ export async function getMeetings(): Promise<Tables<"Meetings">[]> {
   }
 }
 
+
 export async function getTranscriptionByMeetingId({
   MeetingId,
 }: {
