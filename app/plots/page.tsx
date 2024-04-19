@@ -1,4 +1,3 @@
-import ExampleUploader from "@/components/examples/example-uploader";
 export default async function Dashboard() {
   return (
     <>
