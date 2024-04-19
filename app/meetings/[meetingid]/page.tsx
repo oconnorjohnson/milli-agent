@@ -1,9 +1,7 @@
 import { getTranscriptionByMeetingId } from "@/server/db/read";
 import type { DeepgramResponse } from "@/types/deepgram_types";
-import { Card } from "@/components/ui/card";
-import MeetingPage from "@/components/meetings/meeting-page";
-import type { Json } from "@/types/db_types";
-import { updateTranscriptionWithFormattedText } from "@/server/db/update";
+import Chat from "@/components/meetings/chat-with-script";
+import AnalyzeScriptButton from "@/components/meetings/analyze-script";
 
 function formatTranscript(
   deepgramResponse: DeepgramResponse
@@ -62,13 +60,19 @@ export default async function MeetingId({
   const formattedTranscript = formatTranscript(transcription);
   return (
     <div>
-      <div>
-        {formattedTranscript.map((paragraph, index) => (
-          <p key={index} className="mb-4">
-            <span className="font-bold text-lg">{paragraph.speaker}:</span>
-            <span className="ml-2">{paragraph.text}</span>
-          </p>
-        ))}
+      <AnalyzeScriptButton />
+      <div className="flex flex-cols-2 gap-4">
+        <div className="w-1/2">
+          {formattedTranscript.map((paragraph, index) => (
+            <p key={index} className="mb-4">
+              <span className="font-bold text-lg">{paragraph.speaker}:</span>
+              <span className="ml-2">{paragraph.text}</span>
+            </p>
+          ))}
+        </div>
+        <div className="w-1/2">
+          <Chat />
+        </div>
       </div>
     </div>
   );

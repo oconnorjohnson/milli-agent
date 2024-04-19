@@ -29,8 +29,12 @@ const FormSchema = z.object({
   date: z.date({
     required_error: "A date of birth is required.",
   }),
-  title: z.string({ required_error: "A title is required." }),
-  description: z.string({ required_error: "A description is required." }),
+  title: z
+    .string({ required_error: "A title is required." })
+    .min(3, "A title is required."),
+  description: z
+    .string({ required_error: "A description is required." })
+    .min(25, "A description is required."),
 });
 
 export default function NewMeetingForm() {
