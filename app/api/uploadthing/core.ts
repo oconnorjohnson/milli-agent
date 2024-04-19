@@ -1,5 +1,6 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
+import { revalidatePath } from "next/cache";
 import { currentUser } from "@clerk/nextjs";
 import { updateMeeting } from "@/server/db/update";
 import { z } from "zod";

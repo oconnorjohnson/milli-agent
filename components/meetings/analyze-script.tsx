@@ -1,11 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { chunkTranscript } from "@/server/actions/transcripts/chunker";
 
-async function onClick() {
-  console.log("clicked");
-}
-
-export default function AnalyzeScript() {
+export default function AnalyzeScript({ MeetingId }: { MeetingId: number }) {
+  async function onClick() {
+    const chunkedTranscript = await chunkTranscript({ MeetingId: MeetingId });
+    console.log("clicked");
+    console.log(chunkedTranscript);
+  }
   return (
     <>
       <Button

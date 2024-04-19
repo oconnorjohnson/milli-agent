@@ -60,7 +60,7 @@ export default async function MeetingId({
   const formattedTranscript = formatTranscript(transcription);
   return (
     <div>
-      <AnalyzeScriptButton />
+      <AnalyzeScriptButton MeetingId={MeetingId} />
       <div className="flex flex-cols-2 gap-4">
         <div className="w-1/2">
           {formattedTranscript.map((paragraph, index) => (
