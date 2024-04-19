@@ -2,6 +2,25 @@
 import { supabase } from "@/lib/initSupabase";
 import { TablesUpdate } from "@/types/db_types";
 
+export async function updateTranscriptionWithChunkedResponses({ Responses, MeetingId }: { Responses: string[], MeetingId: number }): Promise<boolean> {
+  try {
+    const { data, error } = await supabase
+      .from("Transcriptions")
+      .update({ Responses: Responses })
+      .eq("MeetingId", MeetingId);
+    if (error) {
+      console.log(error);
+      return false;
+    } else {
+      console.log(data);
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 export async function updateMeeting(
   MeetingData: TablesUpdate<"Meetings">
 ): Promise<boolean> {
