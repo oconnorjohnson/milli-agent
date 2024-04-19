@@ -6,7 +6,7 @@ export async function updateTranscriptionWithChunkedResponses({ Responses, Meeti
   try {
     const { data, error } = await supabase
       .from("Transcriptions")
-      .update({ Responses: Responses })
+      .update({ "responses": Responses })
       .eq("MeetingId", MeetingId);
     if (error) {
       console.log(error);

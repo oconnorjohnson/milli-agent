@@ -36,6 +36,8 @@ export const ourFileRouter = {
       } else {
         console.log("recordingId is null");
       }
+      revalidatePath(`/meetings`);
+      revalidatePath(`/meetings/[meetingid]`);
       console.log(recordingId);
       console.log("file url", file.url);
 
