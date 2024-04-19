@@ -6,17 +6,15 @@ import { updateTranscriptionWithChunkedResponses } from "@/server/db/update";
 
 const opeani = new OpenAI();
 
-// step 1: take full transcript return from getFormattedTranscriptionByMeetingId and break into chunks of 50000 characters
-
-export async function chunkTranscript({ MeetingId}: { MeetingId: number}) {
+export async function chunkTranscript({ MeetingId}: { MeetingId: number}): Promise<boolean> {
     let responses = [];
     try { 
         const fullScript = await getFormattedTranscriptionByMeetingId({ MeetingId: MeetingId })
-        console.log(`Full script length: ${fullScript!.length}`);
-        console.log("full script:", fullScript);
+        // console.log(`Full script length: ${fullScript!.length}`);
+        // console.log("full script:", fullScript);
         // split the full transcript into chunks of 10000 characters
         if (!fullScript || fullScript.length <= 10000) { 
-            console.log("full script is smaller than 10000 characters");
+            // console.log("full script is smaller than 10000 characters");
             const completion = await opeani.chat.completions.create({ 
                 messages: [
                     {
@@ -29,11 +27,10 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}) {
                     },
                 ],
                 model: "gpt-4-turbo",
-                // response_format: { type: "json_object" },
             });
             responses.push(completion.choices[0].message.content);
-            console.log(completion.choices[0].message.content); 
-            console.log(responses);
+            // console.log(completion.choices[0].message.content); 
+            // console.log(responses);
         if (responses.length > 0) {
             const filteredResponses = responses.filter((response): response is string => response !== null);
 
@@ -44,7 +41,7 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}) {
         }
         } else { 
             const chunks = fullScript.match(/.{1,10000}/gs);
-            console.log("Total chunks: ", chunks!.length);
+            // console.log("Total chunks: ", chunks!.length);
             chunks!.forEach((chunk, index) => {
                 console.log(`Chunk ${index + 1} length: ${chunk.length}`);
             });
@@ -63,14 +60,13 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}) {
                             },
                         ],
                         model: "gpt-4-turbo",
-                        // response_format: { type: "json_object" },
                     });
                     responses.push(completion.choices[0].message.content);
                     console.log(completion.choices[0].message.content);
                 }
             } 
         }
-        console.log(responses);
+        // console.log(responses);
         if (responses.length > 0) {
             const filteredResponses = responses.filter((response): response is string => response !== null);
 
@@ -79,6 +75,7 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}) {
                 return true;
             }
         }
+        return true;
     } catch (error) {
         console.log(error);
         throw error;
