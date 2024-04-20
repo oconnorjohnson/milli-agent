@@ -1,7 +1,10 @@
 import { getTranscriptionByMeetingId } from "@/server/db/read";
 import type { DeepgramResponse } from "@/types/deepgram_types";
 import Chat from "@/components/meetings/chat-with-script";
-import AnalyzeScriptButton from "@/components/meetings/analyze-script";
+import {
+  ChunkScriptButton,
+  ChunkTopicsButton,
+} from "@/components/meetings/analyze-script";
 
 function formatTranscript(
   deepgramResponse: DeepgramResponse
@@ -60,7 +63,8 @@ export default async function MeetingId({
   const formattedTranscript = formatTranscript(transcription);
   return (
     <div>
-      <AnalyzeScriptButton MeetingId={MeetingId} />
+      <ChunkScriptButton MeetingId={MeetingId} />
+      <ChunkTopicsButton MeetingId={MeetingId} />
       <div className="flex flex-cols-2 gap-4">
         <div className="w-1/2">
           {formattedTranscript.map((paragraph, index) => (

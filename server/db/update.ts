@@ -2,7 +2,7 @@
 import { supabase } from "@/lib/initSupabase";
 import { TablesUpdate } from "@/types/db_types";
 
-export async function updateTranscriptionWithChunkedResponses({ Responses, MeetingId }: { Responses: string[], MeetingId: number }): Promise<boolean> {
+export async function updateTranscriptionWithChunkedResponses({ Responses, MeetingId }: { Responses: string, MeetingId: number }): Promise<boolean> {
   try {
     const { data, error } = await supabase
       .from("Transcriptions")

@@ -70,3 +70,22 @@ export async function getFormattedTranscriptionByMeetingId({
     throw error;
   }
 }
+
+export async function getTranscriptionAndResponsesByMeeting({ MeetingId }: { MeetingId: number }): Promise<Pick<Tables<"Transcriptions">, 'formattedText' | 'responses'>> {
+  try {
+    const { data, error } = await supabase 
+      .from("Transcriptions")
+      .select("formattedText, responses")
+      .eq("MeetingId", MeetingId)
+      .single();
+    if (error) {
+      console.log(error);
+      throw error;
+    } else {
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
