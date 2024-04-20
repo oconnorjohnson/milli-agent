@@ -7,15 +7,24 @@ import { getTranscriptionAndResponsesByMeeting } from "@/server/db/read";
 
 const opeani = new OpenAI();
 
+/**
+ * Processes a transcript by breaking it into manageable chunks and using OpenAI to analyze each chunk.
+ * This function takes a MeetingId, retrieves the associated transcript, splits it into chunks (if necessary),
+ * sends each chunk to OpenAI for processing, and then updates the database with the processed responses.
+ * OpenAI returns responses with a TITLE, START, and END marker, which are used to identify the corresponding text chunks in @/server/actions/transcripts/chunk-finder.ts.
+ * @param {MeetingId: number} - The ID of the meeting whose transcript needs to be chunked and processed.
+ * @returns {Promise<boolean>} - A promise that resolves to true if the operation was successful.
+ */
+
 export async function chunkTranscript({ MeetingId}: { MeetingId: number}): Promise<boolean> {
     let responses = [];
     try { 
+        // Retrieve the full transcript for the given meeting ID.
         const fullScript = await getFormattedTranscriptionByMeetingId({ MeetingId: MeetingId })
-        // console.log(`Full script length: ${fullScript!.length}`);
-        // console.log("full script:", fullScript);
-        // split the full transcript into chunks of 10000 characters
+        
+        // Check if the full transcript is less than or equal to 10000 characters.
         if (!fullScript || fullScript.length <= 10000) { 
-            // console.log("full script is smaller than 10000 characters");
+           // If the transcript is small enough, process it in a single chunk.
             const completion = await opeani.chat.completions.create({ 
                 messages: [
                     {
@@ -30,8 +39,6 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}): Promi
                 model: "gpt-4-turbo",
             });
             responses.push(completion.choices[0].message.content);
-            // console.log(completion.choices[0].message.content); 
-            // console.log(responses);
         if (responses.length > 0) {
             const filterResponses = responses.filter((response): response is string => response !== null);
             const removeNewLines = (str: string) => str.replace(/\n/g, "");
@@ -44,8 +51,8 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}): Promi
             }
         }
         } else { 
+            // If the transcript is too long, split it into chunks of 10000 characters and process each chunk.
             const chunks = fullScript.match(/.{1,10000}/gs);
-            // console.log("Total chunks: ", chunks!.length);
             chunks!.forEach((chunk, index) => {
                 console.log(`Chunk ${index + 1} length: ${chunk.length}`);
             });
@@ -70,7 +77,6 @@ export async function chunkTranscript({ MeetingId}: { MeetingId: number}): Promi
                 }
             } 
         }
-        // console.log(responses);
         if (responses.length > 0) {
             const filterResponses = responses.filter((response): response is string => response !== null);
             // function to remove all \n from filteredResponses

@@ -89,6 +89,38 @@ export type Database = {
           },
         ]
       }
+      TopicChunks: {
+        Row: {
+          chunk: string | null
+          created_at: string
+          id: number
+          MeetingId: number | null
+          topic: string | null
+        }
+        Insert: {
+          chunk?: string | null
+          created_at?: string
+          id?: number
+          MeetingId?: number | null
+          topic?: string | null
+        }
+        Update: {
+          chunk?: string | null
+          created_at?: string
+          id?: number
+          MeetingId?: number | null
+          topic?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_TopicChunks_MeetingId_fkey"
+            columns: ["MeetingId"]
+            isOneToOne: false
+            referencedRelation: "Meetings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       Transcriptions: {
         Row: {
           created_at: string
