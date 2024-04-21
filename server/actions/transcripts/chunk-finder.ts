@@ -47,7 +47,8 @@ export async function chunkTranscriptByTopic({ MeetingId }: { MeetingId: number 
     // If any chunks were identified and extracted, save them to the database.
     // This step is crucial for persisting the structured data for future use.
     if (chunks.length > 0) {
-       await createTopicChunks({ TopicChunkData: chunks })
+       const chunksWithMeetingId = chunks.map(chunk => ({ ...chunk, MeetingId }));
+       await createTopicChunks({ TopicChunkData: chunksWithMeetingId })
     }
     return true;
 }

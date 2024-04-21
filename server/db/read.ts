@@ -2,6 +2,26 @@
 import { supabase } from "@/lib/initSupabase";
 import { Tables } from "@/types/db_types";
 
+export async function getChunksByMeetingId({ MeetingId }: { MeetingId: number }): Promise<Tables<"TopicChunks">["chunk"][]> {
+  try {
+    const { data, error } = await supabase
+      .from("TopicChunks")
+      .select("chunk")
+      .eq("MeetingId", MeetingId);
+    if (error) {
+      console.log(error);
+      throw error;
+    } else {
+      const chunks = data.map(item => item.chunk);
+      console.log(chunks);
+      return chunks;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function getMeetings(): Promise<Tables<"Meetings">[]> {
   try {
     const { data, error } = await supabase
@@ -20,7 +40,6 @@ export async function getMeetings(): Promise<Tables<"Meetings">[]> {
     throw error;
   }
 }
-
 
 export async function getTranscriptionByMeetingId({
   MeetingId,
@@ -89,3 +108,4 @@ export async function getTranscriptionAndResponsesByMeeting({ MeetingId }: { Mee
     throw error;
   }
 }
+

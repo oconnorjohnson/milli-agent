@@ -9,6 +9,47 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      ChunkAnalysis: {
+        Row: {
+          created_at: string
+          decisionTracker: string | null
+          id: number
+          ideaTracker: string | null
+          MeetingId: number | null
+          sentimentTracker: string | null
+          summarizer: string | null
+          themeTracker: string | null
+        }
+        Insert: {
+          created_at?: string
+          decisionTracker?: string | null
+          id?: number
+          ideaTracker?: string | null
+          MeetingId?: number | null
+          sentimentTracker?: string | null
+          summarizer?: string | null
+          themeTracker?: string | null
+        }
+        Update: {
+          created_at?: string
+          decisionTracker?: string | null
+          id?: number
+          ideaTracker?: string | null
+          MeetingId?: number | null
+          sentimentTracker?: string | null
+          summarizer?: string | null
+          themeTracker?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_ChunkAnalysis_MeetingId_fkey"
+            columns: ["MeetingId"]
+            isOneToOne: false
+            referencedRelation: "Meetings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       Meetings: {
         Row: {
           created_at: string

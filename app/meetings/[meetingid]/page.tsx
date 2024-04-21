@@ -2,46 +2,20 @@ import { getTranscriptionByMeetingId } from "@/server/db/read";
 import type { DeepgramResponse } from "@/types/deepgram_types";
 import Chat from "@/components/meetings/chat-with-script";
 import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import {
   ChunkScriptButton,
   ChunkTopicsButton,
+  AnalyzeChunksButton,
 } from "@/components/meetings/analyze-script";
-
-function formatTranscript(
-  deepgramResponse: DeepgramResponse
-): { speaker: string; text: string }[] {
-  const words =
-    deepgramResponse.result.results.channels[0].alternatives[0].words;
-  let currentSpeaker = words[0].speaker;
-  let sentences: { speaker: string; text: string }[] = [];
-  let sentence = "";
-  words.forEach((word) => {
-    if (word.speaker !== currentSpeaker) {
-      sentences.push({
-        speaker: `Speaker ${currentSpeaker}`,
-        text: sentence.trim(),
-      });
-      currentSpeaker = word.speaker;
-      sentence = "";
-    }
-    sentence += word.punctuated_word + " ";
-    // Add new line for a natural paragraph break after a certain number of words or punctuation.
-    if (
-      word.punctuated_word.endsWith(".") ||
-      word.punctuated_word.endsWith("?") ||
-      word.punctuated_word.endsWith("!")
-    ) {
-      sentence += "\n";
-    }
-  });
-  // Append any remaining text in the sentence buffer.
-  if (sentence.trim().length > 0) {
-    sentences.push({
-      speaker: `Speaker ${currentSpeaker}`,
-      text: sentence.trim(),
-    });
-  }
-  return sentences;
-}
+import { ScrollArea } from "@/components/ui/scroll-area";
+import TranscriptScroll from "@/components/meetings/transcript-scroll";
 
 export default async function MeetingId({
   params,
@@ -57,25 +31,32 @@ export default async function MeetingId({
     MeetingId: MeetingId,
   });
   console.log("transcription: ", transcript);
-
   const transcription = transcript;
-  // @ts-ignore
-  const formattedTranscript = formatTranscript(transcription);
+
   return (
     <div>
-      <ChunkScriptButton MeetingId={MeetingId} />
-      <ChunkTopicsButton MeetingId={MeetingId} />
-      <div className="flex flex-cols-2 gap-4">
+      <div className="flex flex-row">
         <div className="w-1/2">
-          {formattedTranscript.map((paragraph, index) => (
-            <p key={index} className="mb-4">
-              <span className="font-bold text-lg">{paragraph.speaker}:</span>
-              <span className="ml-2">{paragraph.text}</span>
-            </p>
-          ))}
+          <ChunkScriptButton MeetingId={MeetingId} />
+          <ChunkTopicsButton MeetingId={MeetingId} />
+          <AnalyzeChunksButton MeetingId={MeetingId} />
+          {/* @ts-ignore */}
+          <TranscriptScroll transcript={transcription} />
         </div>
+        <div className="px-2" />
         <div className="w-1/2">
-          <Chat />
+          <ScrollArea className="w-[220px] h-[550px] md:w-[500px] md:h-[700px] overflow-hidden ">
+            <Card className="w-full h-full my-4 ">
+              <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Card Content</p>
+              </CardContent>
+              <CardFooter>Card Footer</CardFooter>
+            </Card>
+          </ScrollArea>
         </div>
       </div>
     </div>

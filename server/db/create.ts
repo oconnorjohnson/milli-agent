@@ -6,7 +6,25 @@ import { TablesInsert } from "@/types/db_types";
 interface Chunk {
   topic: string;
   chunk: string;
+  MeetingId: number;
 }
+
+export async function createChunkAnalyses( ChunkAnalysisData: TablesInsert<"ChunkAnalysis">[] ): Promise<boolean> {
+  try {
+    const { data, error } = await supabase 
+      .from("ChunkAnalysis")
+      .insert(ChunkAnalysisData);
+    if (error) { 
+      console.log(error);
+      return false;
+    } else { 
+      return true;
+    }
+  } catch (error) { 
+    console.log(error);
+    throw error;
+  }
+} 
 
 // Use `Chunk[]` as the type for `TopicChunkData`
 export async function createTopicChunks({ TopicChunkData }: { TopicChunkData: Chunk[] }): Promise<boolean> {
