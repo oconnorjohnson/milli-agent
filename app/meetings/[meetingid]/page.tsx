@@ -2,8 +2,12 @@ import {
   getTranscriptionByMeetingId,
   getAnalysisChunksByMeetingId,
 } from "@/server/db/read";
-import type { DeepgramResponse } from "@/types/deepgram_types";
-import Chat from "@/components/meetings/chat-with-script";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Card,
   CardHeader,
@@ -68,9 +72,21 @@ export default async function MeetingId({
                   <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <Accordion type="multiple" className="w-full">
+                    {analysisChunks.map((chunk, index) =>
+                      chunk.summarizer ? (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                          <AccordionTrigger>{`Summary ${
+                            index + 1
+                          }`}</AccordionTrigger>
+                          <AccordionContent>
+                            {chunk.summarizer}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : null
+                    )}
+                  </Accordion>
                 </CardContent>
-                <CardFooter>Card Footer</CardFooter>
               </Card>
               {/* Theme Tracker */}
               <Card className=" w-full h-full my-4 ">
@@ -79,9 +95,21 @@ export default async function MeetingId({
                   <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <Accordion type="multiple" className="w-full">
+                    {analysisChunks.map((chunk, index) =>
+                      chunk.themeTracker ? (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                          <AccordionTrigger>{`Theme ${
+                            index + 1
+                          }`}</AccordionTrigger>
+                          <AccordionContent>
+                            {chunk.themeTracker}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : null
+                    )}
+                  </Accordion>
                 </CardContent>
-                <CardFooter>Card Footer</CardFooter>
               </Card>
               {/* Idea Tracker */}
               <Card className=" w-full h-full my-4 ">
@@ -90,9 +118,21 @@ export default async function MeetingId({
                   <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <Accordion type="multiple" className="w-full">
+                    {analysisChunks.map((chunk, index) =>
+                      chunk.ideaTracker ? (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                          <AccordionTrigger>{`Idea ${
+                            index + 1
+                          }`}</AccordionTrigger>
+                          <AccordionContent>
+                            {chunk.ideaTracker}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : null
+                    )}
+                  </Accordion>
                 </CardContent>
-                <CardFooter>Card Footer</CardFooter>
               </Card>
               {/* Sentiment Tracker */}
               <Card className=" w-full h-full my-4 ">
@@ -101,9 +141,21 @@ export default async function MeetingId({
                   <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <Accordion type="multiple" className="w-full">
+                    {analysisChunks.map((chunk, index) =>
+                      chunk.sentimentTracker ? (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                          <AccordionTrigger>{`Sentiments ${
+                            index + 1
+                          }`}</AccordionTrigger>
+                          <AccordionContent>
+                            {chunk.sentimentTracker}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : null
+                    )}
+                  </Accordion>
                 </CardContent>
-                <CardFooter>Card Footer</CardFooter>
               </Card>
               {/* Decision Tracker */}
               <Card className=" w-full h-full mt-4 ">
@@ -112,9 +164,21 @@ export default async function MeetingId({
                   <CardDescription>Card Description</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <Accordion type="multiple" className="w-full">
+                    {analysisChunks.map((chunk, index) =>
+                      chunk.decisionTracker ? (
+                        <AccordionItem key={index} value={`item-${index}`}>
+                          <AccordionTrigger>{`Decision ${
+                            index + 1
+                          }`}</AccordionTrigger>
+                          <AccordionContent>
+                            {chunk.decisionTracker}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : null
+                    )}
+                  </Accordion>
                 </CardContent>
-                <CardFooter>Card Footer</CardFooter>
               </Card>
             </ScrollArea>
           </div>

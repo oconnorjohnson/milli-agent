@@ -8,6 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ExpandIcon } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -50,7 +56,8 @@ export default function PopoutAnalysisCard({
           </Button>
         </DialogTrigger>
         <DialogContent className="">
-          <ScrollArea className="z-0  h-[550px]  md:h-[750px] overflow-hidden">
+          <ScrollArea className="z-0  h-[550px]  md:h-[750px] overflow-hidden px-4">
+            {/* Summarizer */}
             {/* Summarizer */}
             <Card className=" w-full h-full mb-4 ">
               <CardHeader>
@@ -58,9 +65,19 @@ export default function PopoutAnalysisCard({
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <Accordion type="multiple" className="w-full">
+                  {analysisChunks.map((chunk, index) =>
+                    chunk.summarizer ? (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{`Summary ${
+                          index + 1
+                        }`}</AccordionTrigger>
+                        <AccordionContent>{chunk.summarizer}</AccordionContent>
+                      </AccordionItem>
+                    ) : null
+                  )}
+                </Accordion>
               </CardContent>
-              <CardFooter>Card Footer</CardFooter>
             </Card>
             {/* Theme Tracker */}
             <Card className=" w-full h-full my-4 ">
@@ -69,9 +86,21 @@ export default function PopoutAnalysisCard({
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <Accordion type="multiple" className="w-full">
+                  {analysisChunks.map((chunk, index) =>
+                    chunk.themeTracker ? (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{`Theme ${
+                          index + 1
+                        }`}</AccordionTrigger>
+                        <AccordionContent>
+                          {chunk.themeTracker}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ) : null
+                  )}
+                </Accordion>
               </CardContent>
-              <CardFooter>Card Footer</CardFooter>
             </Card>
             {/* Idea Tracker */}
             <Card className=" w-full h-full my-4 ">
@@ -80,9 +109,19 @@ export default function PopoutAnalysisCard({
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <Accordion type="multiple" className="w-full">
+                  {analysisChunks.map((chunk, index) =>
+                    chunk.ideaTracker ? (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{`Idea ${
+                          index + 1
+                        }`}</AccordionTrigger>
+                        <AccordionContent>{chunk.ideaTracker}</AccordionContent>
+                      </AccordionItem>
+                    ) : null
+                  )}
+                </Accordion>
               </CardContent>
-              <CardFooter>Card Footer</CardFooter>
             </Card>
             {/* Sentiment Tracker */}
             <Card className=" w-full h-full my-4 ">
@@ -91,9 +130,21 @@ export default function PopoutAnalysisCard({
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <Accordion type="multiple" className="w-full">
+                  {analysisChunks.map((chunk, index) =>
+                    chunk.sentimentTracker ? (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{`Sentiments ${
+                          index + 1
+                        }`}</AccordionTrigger>
+                        <AccordionContent>
+                          {chunk.sentimentTracker}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ) : null
+                  )}
+                </Accordion>
               </CardContent>
-              <CardFooter>Card Footer</CardFooter>
             </Card>
             {/* Decision Tracker */}
             <Card className=" w-full h-full mt-4 ">
@@ -102,9 +153,21 @@ export default function PopoutAnalysisCard({
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <Accordion type="multiple" className="w-full">
+                  {analysisChunks.map((chunk, index) =>
+                    chunk.decisionTracker ? (
+                      <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger>{`Decision ${
+                          index + 1
+                        }`}</AccordionTrigger>
+                        <AccordionContent>
+                          {chunk.decisionTracker}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ) : null
+                  )}
+                </Accordion>
               </CardContent>
-              <CardFooter>Card Footer</CardFooter>
             </Card>
           </ScrollArea>
         </DialogContent>
