@@ -2,6 +2,25 @@
 import { supabase } from "@/lib/initSupabase";
 import { Tables } from "@/types/db_types";
 
+export async function getAnalysisChunksByMeetingId({ MeetingId }: { MeetingId: number }): Promise<Tables<"ChunkAnalysis">[]> {
+  try {
+    const { data, error } = await supabase
+      .from("ChunkAnalysis")
+      .select("*")
+      .eq("MeetingId", MeetingId);
+    if (error) {
+      console.log(error);
+      throw error;
+    } else {
+      console.log(data);
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function getChunksByMeetingId({ MeetingId }: { MeetingId: number }): Promise<Tables<"TopicChunks">["chunk"][]> {
   try {
     const { data, error } = await supabase
