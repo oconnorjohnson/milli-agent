@@ -18,7 +18,7 @@ import { usePathname } from "next/navigation";
 export default function TopNav() {
   const pathname = usePathname();
   return (
-    <div className="sticky top-0 flex h-16 items-center  gap-4 border-b bg-background md:px-6 opacity-95 ">
+    <div className="z-25 sticky top-0 flex h-16 items-center  gap-4 border-b bg-background md:px-6 opacity-95 ">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           href="/"
