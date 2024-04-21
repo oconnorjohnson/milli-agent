@@ -25,7 +25,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import TranscriptScroll from "@/components/meetings/transcript-scroll";
 import PopoutAnalysisCard from "@/components/meetings/popout-analysis-card";
 import { Tables } from "@/types/db_types";
-
+export const runtime = "edge";
 export default async function MeetingId({
   params,
 }: {

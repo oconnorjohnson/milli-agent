@@ -15,7 +15,6 @@ interface ResponseChunk {
  * and saves these chunks to the database.
  */
 export async function chunkTranscriptByTopic({ MeetingId }: { MeetingId: number }): Promise<boolean> {
-    
     // Retrieve the transcript and responses for the given meeting ID from the database.
     // Assumes that the meeting ID is valid and that the database call will return the necessary data.
     const { formattedText, responses } = await getTranscriptionAndResponsesByMeeting({ MeetingId: MeetingId });
