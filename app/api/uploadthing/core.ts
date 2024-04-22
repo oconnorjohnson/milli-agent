@@ -1,3 +1,5 @@
+export const maxDuration = 120; 
+
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { revalidatePath } from "next/cache";
@@ -5,6 +7,7 @@ import { currentUser } from "@clerk/nextjs";
 import { updateMeeting } from "@/server/db/update";
 import { z } from "zod";
 import { TranscribeMeeting } from "@/server/transcription/transcribe";
+// this route has a max lambda duration of 120 seconds
 const f = createUploadthing();
 const auth = async () => {
   const user = await currentUser();
